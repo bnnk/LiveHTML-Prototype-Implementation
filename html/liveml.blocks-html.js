@@ -17,6 +17,7 @@ const bparsers = Object.assign(blocks, {
   js: (bval, app) => { 
     var elem = document.createElement("script")
     elem.innerText = bval
+    document.body.appendChild(elem)
   },
   text: (bval, app) => app.innerText += bval,
   etext: (bval, app) => { 

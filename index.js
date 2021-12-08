@@ -39,7 +39,8 @@ io.on('connection', function(socket){
     console.log("LiveHTML::OnClick", payload)
     usernames.forEach((id, index) => {
       socket.to(id).emit("blocks", [
-        { type: "ehtmlw", value: ["h4", "User " + payload.user + " has helloed " + id + ". <(*ΦωΦ*)>"] }
+        { type: "ehtmlw", value: ["h4", "User " + payload.user + " has helloed " + id + ". <(*ΦωΦ*)>"] },
+        { type: "js", value: `var audio = new Audio('Ding.mp3'); audio.play()` }
       ])
     })
     socket.emit("blocks", [
