@@ -14,11 +14,6 @@ const bparsers = Object.assign(blocks, {
     var elem = app.querySelector(bval[0])
     if(elem) elem.style = bval[1]
   },
-  attr: (bval, app) => Object.assign(app, bval),
-  eattr: (bval, app) => { 
-    var elem = app.querySelector(bval[0])
-    Object.assign(elem, bval[1])
-  },
   js: (bval, app) => { 
     var elem = document.createElement("script")
     elem.innerText = bval
