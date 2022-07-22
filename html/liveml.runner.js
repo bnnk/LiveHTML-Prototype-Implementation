@@ -11,7 +11,7 @@ function Connect(){
   socket.emit(liveEvent("loadhtml"), { user: socket.id, "url": location.href });
 }
 
-const liveml = {
+const $liveml = {
   fullrender: Connect,
   onevent: function(e, ...onArgs){
     socket.on(liveEvent(e), ...onArgs)
@@ -22,5 +22,6 @@ const liveml = {
   emit: function(e, ...emitArgs){
     emitArgs.push({ user: socket.id, "url": location.href })
     socket.emit(liveEvent(e), ...emitArgs)
-  }
+  },
+  createEvent: liveEvent
 }

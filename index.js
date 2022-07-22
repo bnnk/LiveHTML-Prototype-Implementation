@@ -3,11 +3,11 @@ const express = require("express");
 // const { Server } = require("socket.io");
 const socketio = require("socket.io");
 const path = require("path");
-const { instrument } = require("@socket.io/admin-ui");
+const inst = require("@socket.io/admin-ui");
 
 const app = express();
 const httpserver = http.Server(app);
-const io = socketio(httpserver, {
+const io = new socketio(httpserver, {
   cors: {
     origin: ["*"],
     credentials: true
@@ -17,9 +17,6 @@ const liveEvent = (ename) => "live:" + encodeURIComponent(ename)
 const gamedirectory = path.join(__dirname, "html");
 
 app.use(express.static(gamedirectory));
-// instrument(io, {
-//   auth: false
-// });
 
 httpserver.listen(3000);
 
@@ -31,7 +28,7 @@ io.on('connection', function(socket){
     usernames.push(payload.user)
     console.log("LiveHTML::Load", payload)
     socket.emit("blocks", [{ type: "htmlw", value: `
-    <h1 onclick="liveml.emit('yoclick')">Hello!</h1>
+    <h1 onclick="$liveml.emit('yoclick')">Hello!</h1>
     <h2></h2><h4>Hello</h4> 
     ` }])
   })
